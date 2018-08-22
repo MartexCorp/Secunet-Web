@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>SECUNET</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+
+    <!-- Material Dashboard CSS -->
+    <link rel="stylesheet" href="./assets/css/material-dashboard.css"/>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.0/firebaseui.css"/>
+
+
+</head>
+
+<body>
+
+<!--   Core JS Files   -->
+<script src="./assets/js/core/jquery.min.js"></script>
+<script src="./assets/js/core/popper.min.js"></script>
+<script src="./assets/js/bootstrap-material-design.js"></script>
+<script src="./assets/js/notify.min.js"></script>
+
+<script type="text/javascript" src="./assets/js/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" href="./assets/css/bootstrap-multiselect.css" type="text/css"/>
+
+<!-- Library for adding dinamically elements -->
+
+<!--  Notifications Plugin, full documentation here: http://bootstrap-notify.remabledesigns.com/    -->
+<script src="./assets/js/plugins/bootstrap-notify.js"></script>
+
+<!-- Plugin for Scrollbar documentation here: https://github.com/utatti/perfect-scrollbar -->
+<script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
+<!-- Demo init -->
+<script src="./assets/js/plugins/demo.js"></script>
+
+<!-- Material Dashboard Core initialisations of plugins and Bootstrap Material Design Library -->
+<script src="./assets/js/material-dashboard.js?v=2.1.0"></script>
+
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.js"></script>
+
+<!-- Add additional services you want to use -->
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+
+<!-- Comment out (or don't include) services you don't want to use -->
+<!--  -->
+
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+<script src="ui_interaction.js"> connect()</script>
+
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyAEICT-5Ik1DYvKQK3eOyeK4GS3xI7fHwU",
+        authDomain: "health-app-8e402.firebaseapp.com",
+        databaseURL: "https://health-app-8e402.firebaseio.com",
+        projectId: "health-app-8e402",
+        storageBucket: "health-app-8e402.appspot.com",
+        messagingSenderId: "994345923094"
+    };
+    firebase.initializeApp(config);
+</script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.0/firebaseui.css"/>
+<script src="https://cdn.firebase.com/libs/firebaseui/3.1.0/firebaseui.js"></script>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+    <div class="container">
+        <a class="navbar-brand" href="#"><b>SECUNET PORTAL</b></a>
+        <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#access_records" data-toggle="tab"><i class="material-icons">update</i>RECORDS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#write_consultation" data-toggle="tab"><i class="material-icons">create</i>CONSULTATION</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#emergency" data-toggle="tab"><i class="material-icons">warning</i>EMERGENCY
+                            ACCESS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+
+            <span class="navbar-text">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="reload_page()"><i class="material-icons">refresh</i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="material-icons">exit_to_app</i></a>
+          </li>
+        </ul>
+      </span>
+
+        </div>
+    </div>
+</nav>
+
+
+<div class="card-body ">
+    <div class="tab-content text-center">
+        <div class="tab-pane active" id="access_records">
+
+            <div class="row">
+
+
+                <div class="col-md-3 col-sm-3">
+
+                    <div class="card card-profile">
+                        <div class="card-avatar">
+                            <a href="#pablo">
+                                <img class="img" src="./assets/img/faces/pro_pic.png">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-category text-gray">Gynaecologist</h6>
+                            <h4 class="card-title">Manga Ayissi R.</h4>
+                            <p class="card-description">Hopital Central de Yaounde </p>
+                            <button type="button" data-toggle="modal" data-target="#exampleModal"
+                                    class="btn btn-success btn-round"><i class="material-icons">add</i>New User
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-9 col-sm-9">
+                    <div class="card card-nav-tabs text-center">
+                        <div class="card-header card-header-primary">
+                            CONSULTATION PANEL
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title"><b>Obtain Record Information</b></h4>
+
+                            <div class="row">
+
+                                <div class="col-1 col-md-4"></div>
+                                <div class="col-4 col-md-4">
+
+                                    <div class="card card-nav-tabs text-center" style="width: 23rem;">
+                                        <div class="card-header card-header-warning">
+                                            Enter Patient Number
+                                        </div>
+
+                                        <form class="form-inline container-fluid">
+                                            <div class="form-group container">
+                                                <input type="text" class="form-control" value="+237"
+                                                       id="number_consult">
+                                                <button type="button"
+                                                        id="consult_submit"
+                                                        onclick="consult()"
+                                                        class="btn btn-raised btn-fab btn-fab btn-round btn-primary">
+                                                    <i class="material-icons">search</i>
+                                                </button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a id="write_link" data-toggle="tab" href="#write_consultation">
+                                                    <button type="button"
+                                                            onclick="write_pass()"
+                                                            id="write_btn"
+                                                            style="right: auto"
+                                                            class="btn btn-raised btn-fab-mini btn-fab btn-round btn-success"
+                                                            hidden>
+                                                        <i class="material-icons">create</i>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <br>
+                                    <div class="container container-fluid" id="otp_section" hidden>
+                                        <input type="text" id="otp_code" placeholder="Enter OTP Code">
+                                        <button type="button" id="otp_button"
+                                                onclick="validate()"
+                                                class="btn btn-raised btn-fab btn-fab btn-round btn-success">
+                                            <i class="material-icons">done</i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div class="col-1 col-md-4"></div>
+                            </div>
+
+                            <div id="records" hidden>
+                                <div class="row container-fluid jumbotron-fluid  justify-content-around">
+                                    <div class="col-4 col-md-2">
+                                        <img src="assets/img/faces/pro_pic.png" class="img-thumbnail"
+                                             style="height: 120px;width:120px" id="profile_pic">
+                                    </div>
+                                    <div class="col-9 col-md-9">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                Name: <b id="name">Database Name</b><br>
+                                                Age: <b id="years_now"></b> years<br>
+                                                Profession: <b id="profession"> Student. </b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="card card-nav-tabs">
+                                        <div class="card-header card-header-success">
+                                            Records
+                                        </div>
+                                        <div class="card-body" id="record_list" style="z-index: 5">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="card-footer text-muted" data-toggle="tooltip"
+                             title="This Hash Identifies a doctor Uniquely throughout our platform">
+                            <b>Doctor Hash : B758DD7A43B5AB1B61771ACD7ABA6BA31E56BE5A81656C2BD69E0B586CF5FA10</b>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="tab-pane" id="write_consultation">
+
+            <div class="row">
+
+
+                <div class="col-md-3 col-sm-3">
+
+                    <div class="card card-profile">
+                        <div class="card-avatar">
+                            <a href="#pablo">
+                                <img class="img" src="./assets/img/faces/pro_pic.png">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-category text-gray">Gynaecologist</h6>
+                            <h4 class="card-title">Manga Ayissi R.</h4>
+                            <p class="card-description">Hopital Central de Yaounde </p>
+                            <a href="#pablo" class="btn btn-info btn-round">CONTACT US</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-9 col-sm-9">
+
+                    <div class="card card-nav-tabs text-center">
+                        <div class="card-header card-header-primary">
+                            CREATE AND APPEND DATA
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title"><b>Make Consultation</b></h4>
+
+                            <div class="row" style="padding-bottom: 10px">
+                                <div class="col">
+                                    <input type="text" id="date_disabled" class="form-control" placeholder="Date"
+                                           disabled
+                                           style="padding: 10px">
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="hospital_disabled" class="form-control"
+                                           placeholder="Hospital" disabled
+                                           style="padding: 10px">
+
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="consulting_number_disabled" class="form-control"
+                                           placeholder="Patient Telephone Number"
+                                           disabled
+                                           style="padding: 10px">
+
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom: 10px">
+                                <div class="col">
+                                    <div id="diagnosis_col" style="padding-bottom: 20px">
+                                        <input type="text" id="diag" class="form-control"
+                                               placeholder="Extra Diagnosis - Separate multiple entries with comma ','"
+                                               style="padding: 10px">
+                                    </div>
+                                    <form>
+                                        <div>
+                                            <select id="diagnosis_select" multiple="multiple">
+                                                <optgroup label="Diseases">
+                                                    <option value="Malaria">Malaria</option>
+                                                    <option value="Typhoid">Typhoid</option>
+                                                    <option value="Fever">Fever</option>
+                                                </optgroup>
+                                                <optgroup label="Pains">
+                                                    <option value="Headache">Headache</option>
+                                                    <option value="Abdominal pain">Abdominal</option>
+                                                    <option value="Painful Joints">Joints</option>
+                                                </optgroup>
+                                            </select><br/>
+                                            <!--<input type="button" id="btnget" value="Get Selected Values" />-->
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <div class="col">
+                                    <div id="prescription_col" style="padding-bottom: 20px">
+                                        <input type="text" class="form-control" id="pres"
+                                               placeholder="Prescription - Separate multiple entries with comma ','"
+                                               style="padding: 10px">
+                                    </div>
+                                    <form>
+                                        <div>
+                                            <select id="pres_select" multiple="multiple">
+                                                <optgroup label="Vitamins">
+                                                    <option value="Calcium">Calcium</option>
+                                                    <option value="Potassium">Potassium</option>
+                                                </optgroup>
+                                                <optgroup label="Pain Killers">
+                                                    <option value="Paracet(500mg)">Paracet</option>
+                                                    <option value="Ibuprofen(250mg)">Ibuprofen</option>
+                                                </optgroup>
+                                            </select><br/>
+                                            <!--<input type="button" id="btnget" value="Get Selected Values" />-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col">
+                                    <button class="btn btn-success btn-round" onclick="commit_record()"> COMMIT</button>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-default btn-round" onclick="clear_fields()"> CLEAR</button>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted" data-toggle="tooltip"
+                             title="This Hash Identifies a doctor Uniquely throughout our platform">
+                            <b>Doctor Hash : B758DD7A43B5AB1B61771ACD7ABA6BA31E56BE5A81656C2BD69E0B586CF5FA10</b>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="tab-pane" id="emergency">
+
+
+            <div class="row">
+
+                <div class="col-md-3 col-sm-3">
+
+                    <div class="card card-profile">
+                        <div class="card-avatar">
+                            <a href="#pablo">
+                                <img class="img" src="./assets/img/faces/pro_pic.png">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-category text-gray">Gynaecologist</h6>
+                            <h4 class="card-title">Manga Ayissi R.</h4>
+                            <p class="card-description">Hopital Central de Yaounde </p>
+                            <a href="#pablo" class="btn btn-info btn-round">CONTACT US</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-9 col-sm-9">
+
+                    <div class="card card-nav-tabs text-center">
+                        <div class="card-header card-header-primary">
+                            SPECIAL
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title"><b>Emergency Case</b></h4>
+                            <div class="row ">
+                                <div class="col-1 col-md-4"></div>
+                                <div class="col-4 col-md-4">
+                                    <div class="card card-nav-tabs text-center" style="width: 23rem;">
+                                        <div class="card-header card-header-warning">
+                                            Enter Patient Names
+                                        </div>
+                                        <form>
+                                            <div class="row" style="padding-bottom: 10px; padding-top: 10px">
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="emergency_id"
+                                                           placeholder="ID Card Number"
+                                                           style="padding: 10px" required>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-bottom: 10px; padding-top: 10px">
+                                                <div class="col">
+                                                    <input type="text" id="emergency_fname" class="form-control"
+                                                           placeholder="First Name "
+                                                           style="padding: 10px" hidden>
+                                                    <button type="button" onclick="emergency_search()"
+                                                            id="e_search_icon"
+                                                            style="padding-top: 20px"
+                                                            data-toggle="tooltip"
+                                                            title="Launch Search for Corresponding Patient Records"
+                                                            class="btn btn-raised btn-fab btn-fab btn-round btn-danger">
+                                                        <i class="material-icons">search</i>
+                                                    </button>
+                                                    <button type="button" onclick="view_emergency_records()"
+                                                            id="e_records_icon"
+                                                            style="padding-top: 20px"
+                                                            data-toggle="tooltip"
+                                                            title="View Patient Records"
+                                                            class="btn btn-raised btn-fab btn-fab btn-round btn-success"
+                                                            hidden>
+                                                        <i class="material-icons">remove_red_eye</i>
+                                                    </button>
+                                                </div>
+                                                <!--<div class="col">
+                                                    <input type="text" id="emergency_lname" class="form-control" placeholder="Last Name"
+                                                           style="padding: 10px" hidden>
+                                                    <button type="button" onclick="emergency_swap()"
+                                                            style="padding-top: 30px"
+                                                            data-toggle="tooltip"
+                                                            title="Swap between Providing ID Card Number or Correct Order of Patient Names"
+                                                            class="btn btn-raised btn-fab-mini btn-fab btn-round btn-success">
+                                                        <i class="material-icons">swap_horiz</i>
+                                                    </button>
+                                                </div>-->
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <div class="col-1 col-md-4"></div>
+                            </div>
+
+                            <br>
+                            <div class="row container-fluid jumbotron-fluid  justify-content-around" id="emergency_data"
+                                 hidden>
+                                <div class="col-4 col-md-2">
+                                    <img src="assets/img/faces/pro_pic.png" class="img-thumbnail"
+                                         style="height: 120px;width:120px" id="e_profile_pic">
+                                </div>
+                                <div class="col-9 col-md-9">
+                                    <div class="card" style="top: 0%">
+                                        <div class="card-body">
+                                            Name: <b id="e_name">Database Name</b><br>
+                                            NIC Number: <b id="nic"></b><br>
+                                            Telephone: <b id="e_tel">Telephone</b><br>
+                                            Emergency Number 1: <b id="e_num1"> Student. </b><br>
+                                            Emergency Number 2: <b id="e_num2"> Student. </b>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer text-muted">
+                            <b>Doctor Hash : B758DD7A43B5AB1B61771ACD7ABA6BA31E56BE5A81656C2BD69E0B586CF5FA10</b>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!--MODALS VIEW HTML -&#45;&#45;&#45;&#45; START-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">CREATE NEW USER</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="material-icons">person</i>
+                        </span>
+                            </div>
+                            <input type="text" class="form-control" id="create_fname" placeholder="First name">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text">
+                            </span>
+                            </div>
+                            <input type="text" class="form-control" id="create_lname" placeholder="Last Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="material-icons">cake</i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" id="create_dob" placeholder="Date of Birth (yyyy-mm-dd)">
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="material-icons">alternate_email</i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" id="create_email" placeholder="Email Address">
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="material-icons">report_problem</i>
+                        </span>
+                            </div>
+                            <input type="text" class="form-control" id="create_e_num1" placeholder="Emergency Number 1">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text">
+                            </span>
+                            </div>
+                            <input type="text" class="form-control" id="create_e_num2" placeholder="Emergency Number 2">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="material-icons">sim_card</i>
+                        </span>
+                            </div>
+                            <input type="text" value="+237" class="form-control" id="create_tel" placeholder="Telephone Number">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="material-icons">vpn_key</i>
+                            </span>
+                            </div>
+                            <input type="text" class="form-control" id="create_password" placeholder="Password">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="material-icons">perm_contact_calendar</i>
+                        </span>
+                            </div>
+                            <input type="text" class="form-control" id="create_id_num" placeholder="ID Card Number">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="material-icons">work</i>
+                            </span>
+                            </div>
+                            <input type="text" class="form-control" id="create_profession" placeholder="Profession">
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" onclick="generate_pass()" style="right: 28%">Generate Password</button>
+                <button type="button" class="btn btn-secondary " data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="create_carnet()">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODALS VIEW HTML &#45;&#45;&#45;&#45;&#45;&#45; END-->
+
+<div id="recaptcha-container"></div>
+</body>
+<footer>
+
+
+    <script>
+        $(function () {
+            $('#diagnosis_select').multiselect({
+                // includeSelectAllOption: true
+            });
+            /*$('#btnget').click(function() {
+             alert($('#diagnosis_select').val());
+             })*/
+        });
+        $(function () {
+            $('#pres_select').multiselect({
+                //   includeSelectAllOption: true
+            });
+            $('#btnget').click(function () {
+                alert($('#pres_select').val());
+            })
+        });
+    </script>
+    <script src="app.js"></script>
+
+
+</footer>
+
+</html>
