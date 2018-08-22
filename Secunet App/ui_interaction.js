@@ -3,18 +3,6 @@
  */
 var bool = true;
 
-function connect() {
-    const config = {
-        apiKey: "AIzaSyAEICT-5Ik1DYvKQK3eOyeK4GS3xI7fHwU",
-        authDomain: "health-app-8e402.firebaseapp.com",
-        databaseURL: "https://health-app-8e402.firebaseio.com",
-        projectId: "health-app-8e402",
-        storageBucket: "health-app-8e402.appspot.com",
-        messagingSenderId: "994345923094"
-    };
-    firebase.initializeApp(config);
-}
-
 function refresh() {
     const otp = $("#otp_section");
     otp.attr('hidden', '');
